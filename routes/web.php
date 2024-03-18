@@ -25,7 +25,7 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return Inertia::render('Home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
