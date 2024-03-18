@@ -11,6 +11,40 @@ const stats = [
     { name: 'service conversation', value: '$ 0.004', change: '$ 0.00', changeType: 'negative' },
 
 ]
+
+
+import { ref, reactive, watch } from 'vue';
+
+const countries = ['India', 'USA', 'Canada']; // Add more countries or regions
+const selectedCountry = ref(countries[0]);
+const conversationTypes = reactive({
+    marketing: { rate: 0.0099, count: 0 },
+    utility: { rate: 0.0042, count: 0 },
+    authentication: { rate: 0.0042, count: 0 },
+    service: { rate: 0.004, count: 0 },
+});
+
+// Function to calculate total cost
+const calculateTotalRate = () => {
+    return Object.values(conversationTypes).reduce(
+        (total, type) => total + type.rate * type.count,
+        0
+    );
+};
+
+const totalRate = ref(calculateTotalRate());
+
+// Watch for changes in conversation counts
+watch(conversationTypes, () => {
+    totalRate.value = calculateTotalRate();
+}, { deep: true });
+
+// Function to handle country selection
+const selectCountry = (country) => {
+    selectedCountry.value = country;
+    // TODO: Update conversation rates based on selected country
+    // You need to define how the rates change depending on the country here
+};
 </script>
 
 <template>
@@ -19,116 +53,74 @@ const stats = [
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900 mt-4 mb-4 mx-5">COUNTRY OR REGION</h3>
-                        <Menu as="div" class="relative inline-block ml-4">
-                            <div>
-                                <MenuButton
-                                    class="inline-flex w-[40vw] justify-between gap-x-1.5 rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                    Options
-                                    <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                </MenuButton>
-                            </div>
 
-                            <transition enter-active-class="transition ease-out duration-100"
-                                enter-from-class="transform opacity-0 scale-95"
-                                enter-to-class="transform opacity-100 scale-100"
-                                leave-active-class="transition ease-in duration-75"
-                                leave-from-class="transform opacity-100 scale-100"
-                                leave-to-class="transform opacity-0 scale-95">
-                                <MenuItems
-                                    class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div class="py-1">
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Edit</a>
-                                        </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Duplicate</a>
-                                        </MenuItem>
-                                    </div>
-                                    <div class="py-1">
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Archive</a>
-                                        </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Move</a>
-                                        </MenuItem>
-                                    </div>
-                                    <div class="py-1">
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Share</a>
-                                        </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Add
-                                            to favorites</a>
-                                        </MenuItem>
-                                    </div>
-                                    <div class="py-1">
-                                        <MenuItem v-slot="{ active }">
-                                        <a href="#"
-                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Delete</a>
-                                        </MenuItem>
-                                    </div>
-                                </MenuItems>
-                            </transition>
-                        </Menu>
-                        <!-- End dropdown -->
+                        <!-- Country or Region Dropdown -->
+                        <div>
+                            <label for="country-select"
+                                class="text-sm font-semibold leading-6 text-gray-900 mt-4 mb-4 mx-5">COUNTRY OR
+                                REGION</label>
+                            <select id="country-select" v-model="selectedCountry"
+                                @change="selectCountry(selectedCountry)" class="rounded-md border-gray-300">
+                                <option v-for="country in countries" :key="country" :value="country">{{ country }}
+                                </option>
+                            </select>
+                        </div>
 
-                        <!-- Conversation -->
+                        <!-- Conversation Types and Costs -->
                         <div class="mx-auto grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-1 lg:grid-cols-1">
-                            <div v-for="stat in stats" :key="stat.name"
+                            <div v-for="(value, key) in conversationTypes" :key="key"
                                 class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
-                                <div class="text-xl leading-6 text-gray-900 font-bold">{{ stat.name }}</div>
+                                <h3 class="text-xl leading-6 text-gray-900 font-bold">{{ key.charAt(0).toUpperCase() +
+                                key.slice(1) }} conversation</h3>
                                 <div class="text-gray-900 text-sm font-bold">
-                                    US {{ stat.change }}
+                                    US$ {{ value.rate.toFixed(4) }}
                                 </div>
                                 <div
                                     class="w-full flex-none text-sm font-medium leading-10 tracking-tight text-gray-500">
-                                    US {{ stat.value }}/ 24 hours</div>
+                                    US$ {{ value.rate.toFixed(4) }}/ 24 hours
+                                </div>
+
+                                <div
+                                    class="w-full flex-none text-sm font-medium leading-10 tracking-tight text-gray-500">
+                                    {{ value.count  }}
+                                </div>
 
                                 <!-- Volume Range -->
                                 <div class="text-sm font-medium leading-6 text-gray-900">
-                                    <label for="vol"></label>
-                                    <input type="range" id="vol" name="vol" min="0" max="">
+                                    <input type="range" v-model="value.count" :min="0" :max="10000">
+
                                 </div>
                                 <!-- End Volume Range -->
-                                <div class="text-sm justify-end">
-                                    10,000+ conversation</div>
+                                <div class="text-gray-900 text-sm font-bold">
+                                    <span>10, 000+ conversations</span>
+                                </div>
                             </div>
-
                         </div>
 
+                        <!-- Total Rate -->
                         <div class="flex mx-4 justify-between pb-1 border-b border-gray-200">
-                            <div class="text-xl font-medium mx-4">Total rate</div>
-                            <div class="">
-                                <span class="font-bold text-gray-900">US$ 77.319</span>
-                                <div class="text-sm mt-3 mb-4 text-blue-500 justify-end">💡 Saving Tips</div>
+                            <h3 class="text-xl font-medium mx-4">Total rate</h3>
+                            <div class="total-rate">
+                                <h3>Total Rate</h3>
+                                <p>US$ {{ totalRate.toFixed(4) }}</p>
                             </div>
                         </div>
 
+                        <!-- Additional Info and Call to Action -->
                         <div class="mx-4 mt-5 mb-4">
-                            <p class="text-sm mx-4 mt-4 mb-4 w-2/2">To learn more about conversation categories and how
-                                they
-                                apply to your pricing,
-                                <span class=""> recommend consulting a SleekFlow social commerce expert.</span>
+                            <p class="text-sm mx-4 mt-4 mb-4 w-2/2">
+                                To learn more about conversation categories and how they apply to your pricing,
+                                we recommend consulting a SleekFlow social commerce expert.
                             </p>
                             <button type="button"
                                 class="rounded-full mx-5 mt-3 bg-blue-500 px-4 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500">Book
                                 a Demo</button>
                         </div>
-                        <!-- End Conversation -->
-
+                        <!-- End Additional Info -->
 
                     </div>
-
                 </div>
             </div>
-
         </div>
- 
+
 </template>
