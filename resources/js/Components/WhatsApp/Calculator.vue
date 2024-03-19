@@ -58,15 +58,14 @@ const selectCountry = (event) => {
                         <div v-for="(type, key) in conversationTypes" :key="key"
                             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
                             <div class="text-xl font-medium">
-                                <h3 class="text-gray-900 font-bold">{{ key }}</h3>
+                                <h3 class="text-gray-900">{{ key }}</h3>
+                                <span class="w-full flex-none text-sm font-bold leading-10 tracking-tight text-gray-500">
+                                    US$ {{ type.rate.toFixed(4) }}/ 24 hours
+                                </span>
                             </div>
 
-                            <div class="text-xl font-medium justify-end">
+                            <div class="text-xl font-mediums justify-end">
                                 <span class="text-gray-900"> US$ {{ type.cost.toFixed(2) }}</span>
-                            </div>
-
-                            <div class="w-full flex-none text-sm font-bold leading-10 tracking-tight text-gray-500">
-                                US$ {{ type.rate.toFixed(4) }}/ 24 hours
                             </div>
 
                             <div class="w-full flex-none text-sm font-medium leading-10 tracking-tight text-blue-500">
@@ -74,10 +73,10 @@ const selectCountry = (event) => {
                             </div>
 
                             <!-- Volume Range -->
-                            <div class="text-sm font-medium leading-6 text-gray-900 w-full">
+                            <div class="text-sm font-medium leading-6 text-gray-900 ">
                                 <!-- Ensure this is w-full -->
                                 <input type="range" v-model="type.count" :min="0" :max="10000" @input="updateTotalCost"
-                                    class="w-full">
+                                    class="">
                             </div>
                             <!-- End Volume Range -->
                             <div class="flex justify-end w-full">
@@ -87,7 +86,7 @@ const selectCountry = (event) => {
                     </div>
 
                     <!-- Total Rate -->
-                    <div class="flex mx-4 justify-between pb-1 border-b border-gray-200">
+                    <div class="flex mx-4 justify-between pb-1 border-t border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
                         <h3 class="text-xl font-medium mx-4">Total rate</h3>
                         <div class="total-rate">
                             <p class="font-bold text-gray-900">US$ {{ totalCost.toFixed(2) }}</p>
