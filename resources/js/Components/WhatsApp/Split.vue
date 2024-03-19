@@ -14,7 +14,7 @@ import Calculator from '@/Components/WhatsApp/Calculator.vue';
       </defs>
       <rect width="100%" height="100%" stroke-width="0" fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
     </svg>
-    <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-20">
+    <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 flex lg:px-8 lg:py-20 justify-center">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
         <img class="h-11" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&amp;shade=600" alt="Your Company" />
         <div class="mt-24 sm:mt-32 lg:mt-16">
@@ -35,9 +35,9 @@ import Calculator from '@/Components/WhatsApp/Calculator.vue';
       </div>
       <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-15">
         <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-          <div class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-1">
+          <!-- <div class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-1"> -->
             <Calculator />
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
