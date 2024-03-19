@@ -56,15 +56,15 @@ const selectCountry = (event) => {
                     <!-- Conversation Types and Costs -->
                     <div class="mx-auto grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-1 lg:grid-cols-1">
                         <div v-for="(type, key) in conversationTypes" :key="key"
-                            class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
-                            <div class="text-2xl font-bold">
-                                <h3 class="text-gray-900 text-sm font-bold">{{ key }}</h3>
-
+                            class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
+                            <div class="text-xl font-medium">
+                                <h3 class="text-gray-900 font-bold">{{ key }}</h3>
                             </div>
 
-                            <div class="text-sm font-bold justify-end">
-                                <span>US$ {{ type.cost.toFixed(2) }}</span>
+                            <div class="text-xl font-medium justify-end">
+                                <span class="text-gray-900"> US$ {{ type.cost.toFixed(2) }}</span>
                             </div>
+
                             <div class="w-full flex-none text-sm font-bold leading-10 tracking-tight text-gray-500">
                                 US$ {{ type.rate.toFixed(4) }}/ 24 hours
                             </div>
@@ -74,12 +74,14 @@ const selectCountry = (event) => {
                             </div>
 
                             <!-- Volume Range -->
-                            <div class="text-sm font-medium leading-6 text-gray-900">
-                                <input type="range" v-model="type.count" :min="0" :max="10000" @input="updateTotalCost">
+                            <div class="text-sm font-medium leading-6 text-gray-900 w-full">
+                                <!-- Ensure this is w-full -->
+                                <input type="range" v-model="type.count" :min="0" :max="10000" @input="updateTotalCost"
+                                    class="w-full">
                             </div>
                             <!-- End Volume Range -->
-                            <div class="text-sm justify-end">
-                                <span>10, 000+ conversations</span>
+                            <div class="flex justify-end w-full">
+                                <span class="text-sm">10, 000+ conversations</span>
                             </div>
                         </div>
                     </div>
