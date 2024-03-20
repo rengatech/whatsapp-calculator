@@ -59,7 +59,8 @@ const selectCountry = (event) => {
                             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:px-6 xl:px-8">
                             <div class="text-xl font-medium">
                                 <h3 class="text-gray-900">{{ key }}</h3>
-                                <span class="w-full flex-none text-sm font-bold leading-10 tracking-tight text-gray-500">
+                                <span
+                                    class="w-full flex-none text-sm font-bold leading-10 tracking-tight text-gray-500">
                                     US$ {{ type.rate.toFixed(4) }}/ 24 hours
                                 </span>
                             </div>
@@ -74,7 +75,7 @@ const selectCountry = (event) => {
 
                             <!-- Volume Range -->
                             <div class="text-sm font-medium leading-6 text-gray-900 ">
-                                <!-- Ensure this is w-full -->
+
                                 <input type="range" v-model="type.count" :min="0" :max="10000" @input="updateTotalCost"
                                     class="">
                             </div>
@@ -86,7 +87,8 @@ const selectCountry = (event) => {
                     </div>
 
                     <!-- Total Rate -->
-                    <div class="flex mx-4 justify-between pb-1 border-t border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+                    <div
+                        class="flex mx-4 justify-between pb-1 border-t border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
                         <h3 class="text-xl font-medium mx-4">Total rate</h3>
                         <div class="total-rate">
                             <p class="font-bold text-gray-900">US$ {{ totalCost.toFixed(2) }}</p>
@@ -94,7 +96,7 @@ const selectCountry = (event) => {
                         </div>
                     </div>
 
-                    <!-- Additional Info and Call to Action -->
+
                     <div class="mx-4 mt-5 mb-4">
                         <p class="text-sm mx-4 mt-4 mb-4 w-2/2">
                             To learn more about conversation categories and how they apply to your pricing,
@@ -104,7 +106,7 @@ const selectCountry = (event) => {
                             class="rounded-full mx-5 mt-3 bg-blue-500 px-4 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500">Book
                             a Demo</button>
                     </div>
-                    <!-- End Additional Info -->
+                  
 
                 </div>
             </div>
