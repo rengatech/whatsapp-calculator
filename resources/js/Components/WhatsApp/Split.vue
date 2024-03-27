@@ -82,14 +82,17 @@ const selectedTab = ref(2);
           <div v-else-if="selectedTab === 1"> <p>
             1. Business-initiated conversation</p><br>
             <p>2.Relate to a specific transaction and allow for confirmation, suspension or changes to a purchase</p><br>
-            <p>3. Require template approval and customer opt-in</p></div>
+            <p>3. Require template approval and customer opt-in</p>
+            <img src="\images\img2.png" width="350" height="350" class="flex items-center"></div>
           <div v-else-if="selectedTab === 2"> <p>
             1. Business-initiated conversation</p><br>
             <p>2.One-time passcodes used for multiple login steps, such as account verification, recovery, integrity challenges</p><br>
-            <p>3. Require template approval and customer opt-in</p></div>
+            <p>3. Require template approval and customer opt-in</p>
+            <img src="\images\img3.png" width="350" height="350" class="flex items-center"></div>
           <div v-else> <p>1. User-initiated conversation</p><br>
             <p>2. Help resolve customer inquiries</p><br>
-            <p>3. Do not require template approval & customer opt-in</p></div>
+            <p>3. Do not require template approval & customer opt-in</p>
+            <img src="\images\img4.png" width="350" height="350" class="flex items-center"></div>
         </div>
 
         <!-- end 4 tabs -->
