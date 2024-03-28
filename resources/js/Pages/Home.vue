@@ -4,6 +4,7 @@ import Split from "@/Components/WhatsApp/Split.vue";
 import Testimonials from "@/Components/WhatsApp/Testimonials.vue";
 import Pricing from "@/Components/WhatsApp/Pricing.vue";
 import HomeLayout from "@/Layouts/HomeLayout.vue";
+import Discount from "@/Components/WhatsApp/Discount.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import HomeLayout from "@/Layouts/HomeLayout.vue";
         <Section />
 
         <Split />
+        <Discount />
 
         <Testimonials />
         <Pricing />
