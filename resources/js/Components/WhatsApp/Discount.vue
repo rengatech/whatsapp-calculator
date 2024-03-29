@@ -1,5 +1,9 @@
+<script setup>
+</script>
+
+
 <template>
-    <div class="container mx-auto px-4 sm:px-6 mt-20 lg:px-20">
+    <div class="container mx-auto px-4 sm:px-6 py-24 lg:px-20">
         <div class="flex flex-row justify-center mx-28 w-full grid grid-cols-2 gap-x-20">
             <div class="flex flex-col  justify-center mr-16 ">
                 <button class="border bg-blue-700 font-bold  text-white w-72 h-14 rounded-full ">Increase
